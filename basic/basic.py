@@ -90,7 +90,7 @@ def on_draw():
 	# 0 is WHICH attribute we're actually digging through
 	# 3 is how many items
 	# gl_float is the type of the item
-	# gl_false is just a setting to
+	# gl_false is just a setting to normalize the values... we don't need this?
 	# 3 * 4 is "how far to jump into the array" to get to the next item
 	# 0 is the offset
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * 4, 0)

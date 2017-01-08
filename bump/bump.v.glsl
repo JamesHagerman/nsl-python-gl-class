@@ -1,4 +1,8 @@
-#version 330
+#version 300 es
+
+#ifdef GL_ES
+precision mediump float;
+#endif
 
 layout(location = 0) in vec3 position;
 layout(location = 1) in vec3 normal;
@@ -18,11 +22,11 @@ void main()
 {
 	mat3 normalMatrix = mat3(transpose(inverse(modelMatrix)));
 	mat4 pmvMatrix = projMatrix * viewMatrix * modelMatrix;
-	
+
 	gl_Position = pmvMatrix * vec4(position, 1.0f);
-	
+
 	worldPos = modelMatrix * vec4(position, 1.0f);
 	eye = viewMatrix * worldPos;
 	norm = normalize(normalMatrix * normal);
-	uv = texCoords;	 
+	uv = texCoords;
 }

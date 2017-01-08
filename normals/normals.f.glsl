@@ -1,4 +1,8 @@
-#version 330
+#version 300 es
+
+#ifdef GL_ES
+precision mediump float;
+#endif
 
 uniform sampler2D colorMap;
 
@@ -12,6 +16,6 @@ void main()
 	vec4 color = texture2D(colorMap, uv);
 
 	vec4 normColor = vec4(norm * 0.5 + 0.5, 1.0f);
-	
-	outputColor = normColor;
+
+	outputColor = normColor.r * color;
 }

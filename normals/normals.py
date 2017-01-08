@@ -8,21 +8,21 @@ from math3d import *
 
 
 cubeBuffer = [
-				-1.0, 1.0, -1.0,	0,1,0,		0,0,	-1.0, 1.0, 1.0,		0,1,0,		 1,0,	 1.0, 1.0, 1.0,		0,1,0,		1,1,	
+				-1.0, 1.0, -1.0,	0,1,0,		0,0,	-1.0, 1.0, 1.0,		0,1,0,		 1,0,	 1.0, 1.0, 1.0,		0,1,0,		1,1,
 				-1.0, 1.0, -1.0,	0,1,0,		0,0,	 1.0, 1.0, 1.0,		0,1,0,		 1,1,	 1.0, 1.0, -1.0,	0,1,0,		0,1,
-				
+
 				1.0, -1.0, -1.0,	0,-1,0,		0,0,	 1.0, -1.0, 1.0,	0,-1,0,		 1,0,	-1.0, -1.0, 1.0,	0,-1,0,		1,1,
 				1.0, -1.0, -1.0,	0,-1,0,		0,0,	-1.0, -1.0, 1.0,	0,-1,0,		 1,1,	-1.0, -1.0, -1,		0,-1,0,		0,1,
-				
+
 				-1.0, -1.0, -1,		-1,0,0,		0,0,	-1.0, -1.0, 1.0,	-1,0,0,		 1,0,	-1.0, 1.0, 1.0,		-1,0,0,		1,1,
 				-1.0, -1.0, -1,		-1,0,0,		0,0,	-1.0, 1.0, 1.0,		-1,0,0,		 1,1,	-1.0, 1.0, -1.0,	-1,0,0,		0,1,
-				
+
 				1.0, -1.0, 1.0,		1,0,0,		0,0,	 1.0, -1.0, -1.0,	1,0,0,		 1,0,	 1.0, 1.0, -1.0,	1,0,0,		1,1,
 				1.0, -1.0, 1.0,		1,0,0,		0,0,	 1.0, 1.0, -1.0,	1,0,0,		 1,1,	 1.0, 1.0, 1.0,		1,0,0,		0,1,
-				
+
 				1.0, 1.0, -1.0,		0,0,-1,		0,0,	 1.0, -1.0, -1.0,	0,0,-1,		 1,0,	-1.0, -1.0, -1,		0,0,-1,		1,1,
 				1.0, 1.0, -1.0,		0,0,-1,		0,0,	-1.0, -1.0, -1,		0,0,-1,		 1,1,	-1.0, 1.0, -1.0,	0,0,-1,		0,1,
-				
+
 				-1.0, -1.0, 1.0,	0,0,1,		0,0,	 1.0, -1.0, 1.0,	0,0,1,		 1,0,	 1.0, 1.0, 1.0,		0,0,1,		1,1,
 				-1.0, -1.0, 1.0,	0,0,1,		0,0,	 1.0, 1.0, 1.0,		0,0,1,		 1,1,	-1.0, 1.0, 1.0,		0,0,1,		0,1,
 			]
@@ -34,11 +34,11 @@ width = 800
 height = 600
 
 window = pyglet.window.Window(width=width, height=height)
-			
+
 vboId = GLuint()
 
 textureId = GLuint()
-	
+
 vboBuffer = (GLfloat * len(cubeBuffer))(*cubeBuffer)
 
 myShader = Shader(''.join(open('normals.v.glsl')),''.join(open('normals.f.glsl')))
@@ -61,26 +61,26 @@ def on_draw():
 	myShader.uniform_matrixf('modelMatrix', modelMatrix)
 	myShader.uniform_matrixf('viewMatrix', viewMatrix)
 	myShader.uniform_matrixf('projMatrix', projMatrix)
-	
+
 	glBindBuffer(GL_ARRAY_BUFFER, vboId)
-	
+
 	glEnableVertexAttribArray(0)
 	glEnableVertexAttribArray(1)
 	glEnableVertexAttribArray(2)
-	
+
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * 4, 0)
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * 4, 12)
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * 4, 24)
-	
+
 	glDrawArrays(GL_TRIANGLES, 0, len(vboBuffer) / 8)
-	
+
 	glDisableVertexAttribArray(0)
 	glDisableVertexAttribArray(1)
 	glDisableVertexAttribArray(2)
 
-glEnable(GL_DEPTH_TEST);	
+glEnable(GL_DEPTH_TEST);
 glClearColor(0.0, 0.0, 0.0, 1.0)
-	
+
 glGenBuffers(1, vboId)
 glBindBuffer(GL_ARRAY_BUFFER, vboId)
 glBufferData(GL_ARRAY_BUFFER, len(vboBuffer) * 4, vboBuffer, GL_STATIC_DRAW)

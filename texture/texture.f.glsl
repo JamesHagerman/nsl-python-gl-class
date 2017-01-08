@@ -1,4 +1,8 @@
-#version 330
+#version 300 es
+
+#ifdef GL_ES
+precision mediump float;
+#endif
 
 uniform sampler2D colorMap;
 

@@ -7,7 +7,8 @@ uniform mat4 viewMatrix;
 uniform mat4 projMatrix;
 
 // You can also hand some data through the pipe that skips the rasterizer..
-// We'll do that later...
+// something like:
+// smooth out vec4 col;
 
 void main()
 {

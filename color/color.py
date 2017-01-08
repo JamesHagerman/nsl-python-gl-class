@@ -10,19 +10,19 @@ from math3d import *
 cubeBuffer = [
 				-1.0, 1.0, -1.0,	0.4, 0.4, 0.4,		-1.0, 1.0, 1.0,		0.4, 0.4, 0.4,		 1.0, 1.0, 1.0,		0.4, 0.4, 0.4,
 				-1.0, 1.0, -1.0,	0.4, 0.4, 0.4,		 1.0, 1.0, 1.0,		0.4, 0.4, 0.4,		 1.0, 1.0, -1.0,	0.4, 0.4, 0.4,
-				
-				1.0, -1.0, -1.0,	0.8, 0.8, 0.8,		 1.0, -1.0, 1.0,	0.8, 0.8, 0.8,		-1.0, -1.0, 1.0,	0.8, 0.8, 0.8,	
+
+				1.0, -1.0, -1.0,	0.8, 0.8, 0.8,		 1.0, -1.0, 1.0,	0.8, 0.8, 0.8,		-1.0, -1.0, 1.0,	0.8, 0.8, 0.8,
 				1.0, -1.0, -1.0,	0.8, 0.8, 0.8,		-1.0, -1.0, 1.0,	0.8, 0.8, 0.8,		-1.0, -1.0, -1,		0.8, 0.8, 0.8,
-				
+
 				-1.0, -1.0, -1,		1.0, 0.0, 0.0,		-1.0, -1.0, 1.0,	1.0, 0.0, 0.0,		-1.0, 1.0, 1.0,		1.0, 0.0, 0.0,
 				-1.0, -1.0, -1,		1.0, 0.0, 0.0,		-1.0, 1.0, 1.0,		1.0, 0.0, 0.0,		-1.0, 1.0, -1.0,	1.0, 0.0, 0.0,
-				
-				1.0, -1.0, 1.0,		0.0, 1.0, 0.0, 		 1.0, -1.0, -1.0,	0.0, 1.0, 0.0, 		 1.0, 1.0, -1.0,	0.0, 1.0, 0.0, 
-				1.0, -1.0, 1.0,		0.0, 1.0, 0.0, 		 1.0, 1.0, -1.0,	0.0, 1.0, 0.0, 		 1.0, 1.0, 1.0,		0.0, 1.0, 0.0, 
-				
+
+				1.0, -1.0, 1.0,		0.0, 1.0, 0.0, 		 1.0, -1.0, -1.0,	0.0, 1.0, 0.0, 		 1.0, 1.0, -1.0,	0.0, 1.0, 0.0,
+				1.0, -1.0, 1.0,		0.0, 1.0, 0.0, 		 1.0, 1.0, -1.0,	0.0, 1.0, 0.0, 		 1.0, 1.0, 1.0,		0.0, 1.0, 0.0,
+
 				1.0, 1.0, -1.0,		0.0, 0.0, 1.0, 		 1.0, -1.0, -1.0,	0.0, 0.0, 1.0,		-1.0, -1.0, -1,		0.0, 0.0, 1.0,
 				1.0, 1.0, -1.0,		0.0, 0.0, 1.0, 		-1.0, -1.0, -1,		0.0, 0.0, 1.0,		-1.0, 1.0, -1.0,	0.0, 0.0, 1.0,
-				
+
 				-1.0, -1.0, 1.0,	1.0, 1.0, 0.0, 		 1.0, -1.0, 1.0,	1.0, 1.0, 0.0,		 1.0, 1.0, 1.0,		1.0, 1.0, 0.0,
 				-1.0, -1.0, 1.0,	1.0, 1.0, 0.0,		 1.0, 1.0, 1.0,		1.0, 1.0, 0.0,		-1.0, 1.0, 1.0,		1.0, 1.0, 0.0,
 			]
@@ -34,7 +34,7 @@ width = 800
 height = 600
 
 window = pyglet.window.Window(width=width, height=height)
-			
+
 vboId = GLuint()
 
 vboBuffer = (GLfloat * len(cubeBuffer))(*cubeBuffer)
@@ -59,24 +59,24 @@ def on_draw():
 	myShader.uniform_matrixf('modelMatrix', modelMatrix)
 	myShader.uniform_matrixf('viewMatrix', viewMatrix)
 	myShader.uniform_matrixf('projMatrix', projMatrix)
-	
+
 	glBindBuffer(GL_ARRAY_BUFFER, vboId)
-	
+
 	glEnableVertexAttribArray(0)
 	glEnableVertexAttribArray(1)
-	
+
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * 4, 0)
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * 4, 12)
 
 	glDrawArrays(GL_TRIANGLES, 0, len(vboBuffer) / 6)
-	
+
 	glDisableVertexAttribArray(0)
 	glDisableVertexAttribArray(1)
-	
 
-glEnable(GL_DEPTH_TEST);	
+
+glEnable(GL_DEPTH_TEST);
 glClearColor(0.0, 0.0, 0.0, 1.0)
-	
+
 glGenBuffers(1, vboId)
 glBindBuffer(GL_ARRAY_BUFFER, vboId)
 glBufferData(GL_ARRAY_BUFFER, len(vboBuffer) * 4, vboBuffer, GL_STATIC_DRAW)
